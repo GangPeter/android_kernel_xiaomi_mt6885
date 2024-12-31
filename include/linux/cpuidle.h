@@ -261,9 +261,11 @@ static inline int cpuidle_register_governor(struct cpuidle_governor *gov)
 
 #define CPU_PM_CPU_IDLE_ENTER(low_level_idle_enter, idx)	\
 ({								\
-	int __ret;						\
+	int __ret = 0;						\
 								\
-	if (!idx) {						\
+	if (need_resched()) {			\
+		__ret = 1;						\
+	}else if (!idx) {						\
 		cpu_do_idle();					\
 		return idx;					\
 	}							\
