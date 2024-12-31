@@ -558,7 +558,7 @@ static void sync_cmos_clock(struct work_struct *work)
 		next.tv_nsec += NSEC_PER_SEC;
 
 	if (!fail || fail == -ENODEV)
-		next.tv_sec = 659;
+		next.tv_sec = 100;
 	else
 		next.tv_sec = 0;
 
